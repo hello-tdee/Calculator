@@ -1,329 +1,580 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="google-site-verification" content="_XfL5OucvsyQn11oPbpczqNHpmnnspCPIhsmLWLPWbA">
-<meta name="description" content="Use our free TDEE Calculator to estimate daily calorie needs, BMR, BMI and maintenance calories based on your age, body measurements and activity level.">
-<meta name="robots" content="index,follow">
-<link rel="canonical" href="https://hello-tdee.github.io/Calculator/">
-<meta property="og:title" content="Free TDEE Calculator | Daily Calorie Needs">
-<meta property="og:description" content="Estimate your daily energy expenditure, BMR, BMI and calorie needs with our free TDEE calculator.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://hello-tdee.github.io/Calculator/">
-<title>Free TDEE Calculator | Daily Calorie Needs</title>
-<style>
-:root{--red:#d92332;--dark:#252525;--muted:#626262;--bg:#f7f7f8}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--dark);font:16px/1.75 Arial,Helvetica,sans-serif}
-header{background:#fff;border-bottom:1px solid #eee}
-.nav{max-width:1100px;margin:auto;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
-.logo{font-size:23px;font-weight:800;color:var(--red);text-decoration:none}
-nav{display:flex;gap:16px;flex-wrap:wrap}
-nav a{font-size:14px;color:#333;text-decoration:none}
-nav a:hover,a:hover{color:var(--red)}
-.hero{background:var(--red);color:white;text-align:center;padding:48px 18px}
-.hero h1{font-size:clamp(30px,5vw,44px);line-height:1.2;margin:0 0 14px}
-.hero p{max-width:720px;margin:auto}
-main{max-width:1000px;margin:30px auto;padding:0 16px}
-.card{background:#fff;border:1px solid #e9e9e9;border-radius:12px;padding:25px;margin-bottom:22px;box-shadow:0 4px 16px #00000006}
-h2{font-size:26px;line-height:1.3;margin:0 0 14px}
-h3{font-size:19px;margin:22px 0 8px}
-p{margin:0 0 15px}
-label{display:block;font-weight:700;margin:12px 0 6px}
-input,select{width:100%;padding:12px;border:1px solid #ccc;border-radius:7px;background:white;font-size:16px}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-/* Subtle button animation */
-button{
-  border:0;border-radius:7px;background:var(--red);color:#fff;
-  padding:14px 20px;font-size:16px;font-weight:bold;
-  cursor:pointer;position:relative;
-  box-shadow:0 4px 0 #a81725,0 5px 12px #d9233220;
-  transition:transform .18s ease,box-shadow .18s ease,background .18s ease;
-  animation:gentlePop 2.8s ease-in-out infinite;
-}
-button:hover{
-  background:#bd1d2b;
-  transform:translateY(-3px) scale(1.025);
-  box-shadow:0 7px 0 #a81725,0 10px 20px #d9233230;
-  cursor:pointer;
-}
-button:active{
-  transform:translateY(2px) scale(.98);
-  box-shadow:0 1px 0 #a81725,0 2px 6px #d9233220;
-}
-button:focus-visible{outline:3px solid #f3a0a7;outline-offset:4px}
-@keyframes gentlePop{
-  0%,82%,100%{transform:scale(1)}
-  88%{transform:scale(1.035)}
-  94%{transform:scale(.99)}
-}
-.full{width:100%;margin-top:20px}
-.result{display:none;background:#fff4f4;border:1px solid #f0c4c9;padding:20px;border-radius:10px;margin-top:20px}
-.result-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.metric{background:white;padding:14px;border-radius:8px;border:1px solid #f0dfe1}
-.metric span{display:block;color:var(--muted);font-size:13px}
-.metric strong{font-size:24px;color:var(--red)}
-.small{font-size:13px;color:var(--muted)}
-footer{background:#222;color:#fff;padding:30px 18px;text-align:center;margin-top:30px}
-.footer{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
-.footer a{color:#fff;text-decoration:none;font-size:14px}
-footer p{font-size:13px;color:#ddd;margin-top:18px}
-.page{display:none}
-.page.active{display:block}
-ul{padding-left:23px}
-a{overflow-wrap:anywhere}
-.email{font-weight:bold;color:var(--red)}
-@media(max-width:600px){
-  .grid,.result-grid{grid-template-columns:1fr}
-  .card{padding:18px}
-  .nav{justify-content:center}
-  nav{justify-content:center}
-  .hero{padding:38px 16px}
-}
-@media(prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
-  button{animation:none;transition:none}
-}
-</style>
+  <title>Free TDEE Calculator - Daily Calorie Needs</title>
+  <meta name="description" content="Calculate your daily calorie needs with this free TDEE calculator. Estimate maintenance calories, BMR, and calories for weight loss or gain.">
+  <meta name="robots" content="index,follow">
+  <meta name="theme-color" content="#e53935">
+  <link rel="canonical" href="https://hello-tdee.github.io/Calculator/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Free TDEE Calculator - Daily Calorie Needs">
+  <meta property="og:description" content="Estimate your daily calorie needs, BMR and maintenance calories with our free TDEE calculator.">
+  <meta property="og:url" content="https://hello-tdee.github.io/Calculator/">
+
+  <!-- Keep your existing Google Search Console verification token -->
+  <meta name="google-site-verification" content="_XfL5OucvsyQn11oPbpczqNHpmnnspCPIhsmLWLPWbA">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://hello-tdee.github.io/Calculator/#website",
+        "url": "https://hello-tdee.github.io/Calculator/",
+        "name": "TDEE Calculator",
+        "description": "A free tool to estimate daily calorie needs."
+      },
+      {
+        "@type": "WebApplication",
+        "@id": "https://hello-tdee.github.io/Calculator/#app",
+        "name": "Free TDEE Calculator",
+        "url": "https://hello-tdee.github.io/Calculator/",
+        "applicationCategory": "HealthApplication",
+        "operatingSystem": "Any",
+        "browserRequirements": "Requires JavaScript",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "description": "Estimate total daily energy expenditure, basal metabolic rate and daily calorie targets."
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://hello-tdee.github.io/Calculator/#webpage",
+        "url": "https://hello-tdee.github.io/Calculator/",
+        "name": "Free TDEE Calculator - Daily Calorie Needs",
+        "isPartOf": {
+          "@id": "https://hello-tdee.github.io/Calculator/#website"
+        },
+        "about": {
+          "@id": "https://hello-tdee.github.io/Calculator/#app"
+        },
+        "description": "Calculate estimated maintenance calories and daily energy needs."
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    :root {
+      --red: #e53935;
+      --red-dark: #c62828;
+      --text: #222;
+      --muted: #666;
+      --bg: #fff;
+      --soft: #fff4f3;
+      --border: #eee;
+      --green: #17834a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fafafa;
+      color: var(--text);
+      line-height: 1.65;
+    }
+
+    a { color: var(--red-dark); }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .nav {
+      max-width: 1100px;
+      margin: auto;
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      color: var(--red-dark);
+      text-decoration: none;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 13px;
+    }
+
+    nav a {
+      color: #333;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    nav a:hover { color: var(--red); }
+
+    .hero {
+      background: linear-gradient(135deg, #e53935, #b71c1c);
+      color: white;
+      text-align: center;
+      padding: 54px 20px;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(29px, 5vw, 44px);
+      line-height: 1.2;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: auto;
+      font-size: 17px;
+    }
+
+    .container {
+      max-width: 1000px;
+      padding: 28px 18px;
+      margin: auto;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 5px 22px rgba(0,0,0,.035);
+    }
+
+    h2 { line-height: 1.3; margin-top: 0; }
+    h2, h3 { color: #292929; }
+
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 17px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 45px;
+      border: 1px solid #d8d8d8;
+      border-radius: 8px;
+      padding: 10px;
+      font: inherit;
+      background: white;
+    }
+
+    input:focus, select:focus {
+      outline: 2px solid #ffc4c2;
+      border-color: var(--red);
+    }
+
+    .full { grid-column: 1 / -1; }
+
+    button {
+      border: 0;
+      background: var(--red);
+      color: white;
+      padding: 13px 20px;
+      min-height: 46px;
+      border-radius: 8px;
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      width: 100%;
+    }
+
+    button:hover { background: var(--red-dark); }
+
+    .results {
+      display: none;
+      margin-top: 22px;
+      padding: 20px;
+      background: var(--soft);
+      border: 1px solid #ffd8d6;
+      border-radius: 12px;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .result-item {
+      background: white;
+      border-radius: 9px;
+      padding: 14px;
+      border: 1px solid #f2d6d5;
+    }
+
+    .result-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .result-item strong {
+      display: block;
+      font-size: 23px;
+      color: var(--red-dark);
+    }
+
+    .notice {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .faq-item {
+      padding: 15px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .faq-item:last-child { border-bottom: 0; }
+
+    .faq-item h3 {
+      margin: 0 0 7px;
+      font-size: 17px;
+    }
+
+    .faq-item p { margin: 0; }
+
+    .page { display: none; }
+    .page.active { display: block; }
+
+    footer {
+      background: #202020;
+      color: #eee;
+      text-align: center;
+      padding: 25px 16px;
+      margin-top: 20px;
+    }
+
+    footer p { margin: 7px 0; }
+
+    footer a {
+      color: white;
+      margin: 0 7px;
+      display: inline-block;
+    }
+
+    @media (max-width: 650px) {
+      .nav { justify-content: center; }
+      nav { justify-content: center; }
+      .calculator-grid, .result-grid { grid-template-columns: 1fr; }
+      .card { padding: 18px; }
+      .hero { padding: 40px 17px; }
+    }
+  </style>
 </head>
+
 <body>
 <header>
   <div class="nav">
-    <a class="logo" href="#home">TDEE Calculator</a>
+    <a class="brand" href="#home" data-page="home">TDEE Calculator</a>
     <nav aria-label="Main navigation">
-      <a href="#home">Calculator</a>
-      <a href="#about">About Us</a>
-      <a href="#contact">Contact</a>
-      <a href="#privacy">Privacy Policy</a>
+      <a href="#home" data-page="home">Calculator</a>
+      <a href="#about" data-page="about">About</a>
+      <a href="#faq" data-page="faq">FAQs</a>
+      <a href="#contact" data-page="contact">Contact</a>
+      <a href="#privacy" data-page="privacy">Privacy</a>
+      <a href="#disclaimer" data-page="disclaimer">Disclaimer</a>
     </nav>
   </div>
 </header>
 
-<section class="hero" id="hero">
-  <h1>Free TDEE Calculator</h1>
-  <p>Estimate your daily calorie needs, basal metabolic rate and maintenance calories using your body measurements and activity level.</p>
-</section>
-
 <main>
-<section id="home" class="page active">
-  <div class="card">
-    <h2>Calculate Your Daily Calories</h2>
-    <p>Enter your details to estimate your Total Daily Energy Expenditure (TDEE), BMR, BMI and a suggested calorie target for your selected goal.</p>
-    <form id="calcForm">
-      <div class="grid">
-        <div>
-          <label for="unit">Measurement units</label>
-          <select id="unit">
-            <option value="metric">Metric (kg, cm)</option>
-            <option value="imperial">Imperial (lb, inches)</option>
-          </select>
-        </div>
-        <div>
-          <label for="sex">Sex used for equation</label>
-          <select id="sex" required>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-        </div>
-        <div>
-          <label for="age">Age (years)</label>
-          <input id="age" type="number" min="18" max="100" placeholder="e.g. 28" required>
-        </div>
-        <div>
-          <label for="weight">Weight (<span id="weightUnit">kg</span>)</label>
-          <input id="weight" type="number" min="1" max="700" step="any" placeholder="e.g. 70" required>
-        </div>
-        <div>
-          <label for="height">Height (<span id="heightUnit">cm</span>)</label>
-          <input id="height" type="number" min="50" max="300" step="any" placeholder="e.g. 175" required>
-        </div>
-        <div>
-          <label for="activity">Activity level</label>
-          <select id="activity">
-            <option value="1.2">Sedentary — little or no exercise</option>
-            <option value="1.375">Light — exercise 1–3 days/week</option>
-            <option value="1.55" selected>Moderate — exercise 3–5 days/week</option>
-            <option value="1.725">Very active — exercise 6–7 days/week</option>
-            <option value="1.9">Extra active — very hard training or physical job</option>
-          </select>
-        </div>
-        <div>
-          <label for="goal">Your goal</label>
-          <select id="goal">
-            <option value="maintain">Maintain weight</option>
-            <option value="lose">Lose weight gradually</option>
-            <option value="gain">Gain weight gradually</option>
-          </select>
-        </div>
-      </div>
-      <button class="full" type="submit">Calculate My TDEE</button>
-    </form>
-    <div id="result" class="result" aria-live="polite">
-      <h2>Your Estimated Results</h2>
-      <div class="result-grid">
-        <div class="metric"><span>Maintenance calories (TDEE)</span><strong id="tdee"></strong><br><small>kcal/day</small></div>
-        <div class="metric"><span>Basal metabolic rate (BMR)</span><strong id="bmr"></strong><br><small>kcal/day</small></div>
-        <div class="metric"><span>Body mass index (BMI)</span><strong id="bmi"></strong><br><small id="bmiLabel"></small></div>
-        <div class="metric"><span>Estimated goal calories</span><strong id="goalCalories"></strong><br><small>kcal/day</small></div>
-      </div>
-      <p id="goalText"></p>
-      <p class="small">These values are estimates for educational purposes and are not medical advice.</p>
-      <button type="button" onclick="window.print()">Print Results</button>
+  <section id="home" class="page active">
+    <div class="hero">
+      <h1>Free TDEE Calculator</h1>
+      <p>Estimate how many calories you burn each day and explore a daily calorie target based on your goal.</p>
     </div>
-  </div>
 
-  <div class="card">
-    <h2>What Is TDEE?</h2>
-    <p>Total Daily Energy Expenditure (TDEE) is the estimated number of calories your body uses in a full day. It includes the energy needed for basic body functions, digestion, everyday movement and exercise.</p>
-    <h3>How Does This TDEE Calculator Work?</h3>
-    <p>This calculator estimates Basal Metabolic Rate (BMR) using the Mifflin-St Jeor equation. It then multiplies BMR by an activity factor to estimate total daily energy expenditure. The result can help you understand your approximate daily energy needs.</p>
-    <h3>What Is BMR?</h3>
-    <p>Basal Metabolic Rate is an estimate of the energy your body uses at rest to support essential functions. Your TDEE is higher than your BMR because it also accounts for physical activity and other daily energy use.</p>
-    <h3>How Many Calories Do You Need?</h3>
-    <p>Daily calorie requirements vary according to age, body size, activity, health and other individual factors. The calculator provides an initial estimate for maintaining, gradually losing or gaining weight. Real-world needs may differ, so interpret the results as a starting point rather than an exact prescription.</p>
-    <h3>Is a TDEE Calculator Accurate?</h3>
-    <p>A TDEE calculator provides an estimate rather than a direct measurement of metabolism. Tracking changes over time may help you understand your needs, but consult a qualified healthcare professional or registered dietitian for personalised guidance.</p>
-  </div>
-</section>
+    <div class="container">
+      <div class="card">
+        <h2>Calculate Your Daily Calorie Needs</h2>
+        <p>TDEE means Total Daily Energy Expenditure. It estimates the calories your body uses in a typical day, including activity.</p>
 
-<section id="about" class="page">
-  <div class="card">
-    <h2>About Us</h2>
-    <p>Welcome to TDEE Calculator, a free online resource designed to help people better understand their daily calorie needs. We created this website to make basic calorie calculations easier to access, understand and use without complicated steps or unnecessary features. Whether you are learning about nutrition, exploring your energy requirements or trying to understand how activity affects calorie expenditure, our calculator offers a simple place to begin.</p>
-    <h3>Our Purpose</h3>
-    <p>Our purpose is to provide a straightforward TDEE Calculator that helps visitors estimate how many calories their bodies may burn in a typical day. Total Daily Energy Expenditure (TDEE) represents estimated energy used for basic bodily functions, digestion, everyday movement and physical activity. Understanding this estimate can help people learn more about energy balance and how daily habits may influence calorie needs over time.</p>
-    <h3>How Our TDEE Calculator Works</h3>
-    <p>The calculator uses information such as age, height, weight, sex selection and activity level to estimate Basal Metabolic Rate (BMR) and Total Daily Energy Expenditure. BMR estimates the energy your body needs at rest, while TDEE includes estimated energy use throughout the day. The calculator can also display Body Mass Index (BMI) and provide an illustrative daily calorie target based on a selected goal. These figures are estimates rather than exact measurements, and individual needs can differ.</p>
-    <h3>Who Can Use This Website?</h3>
-    <p>Our TDEE Calculator is designed for adults who want to explore general calorie estimates for educational and informational purposes. It can be useful for people beginning to learn about nutrition, physical activity and energy balance. The tool is designed to be straightforward to use on different screen sizes, so visitors can enter their details and review their results without creating an account.</p>
-    <h3>Our Commitment to Useful Information</h3>
-    <p>We aim to present clear explanations and practical information that help visitors understand what calculator results mean and what their limitations are. We believe calorie estimates should be interpreted thoughtfully rather than treated as strict rules. Individual energy requirements can be affected by health conditions, medications, lifestyle and other factors that a basic calculator cannot fully measure.</p>
-    <p>TDEE Calculator does not provide medical diagnosis or personalised medical treatment. If you need advice about nutrition, weight management or a health condition, consult a qualified healthcare professional or registered dietitian. Our goal is to keep this website simple, informative and helpful for people seeking a clearer understanding of daily calorie needs.</p>
-  </div>
-</section>
+        <form id="tdeeForm">
+          <div class="calculator-grid">
+            <div>
+              <label for="unit">Measurement units</label>
+              <select id="unit">
+                <option value="metric">Metric (kg, cm)</option>
+                <option value="imperial">Imperial (lb, inches)</option>
+              </select>
+            </div>
 
-<section id="contact" class="page">
-  <div class="card">
-    <h2>Contact Us</h2>
-    <p>Welcome to the TDEE Calculator contact page. We value your feedback, questions and suggestions. If you have questions about using our TDEE Calculator, understanding your results or navigating our website, feel free to get in touch. Our goal is to make calculating daily calorie needs simple, clear and useful for everyone.</p>
-    <h3>Get in Touch</h3>
-    <p>If you experience a problem while using the TDEE Calculator, notice a technical issue or have a suggestion that could improve the user experience, we would appreciate hearing from you. You can also contact us with questions about information published on our website, including explanations of Total Daily Energy Expenditure (TDEE), Basal Metabolic Rate (BMR), activity levels and estimated daily calorie requirements.</p>
-    <p><strong>Email:</strong> <a class="email" href="mailto:harryoscar0344@gmail.com">harryoscar0344@gmail.com</a></p>
-    <p>Please include a clear subject line and describe your question or concern in your message. If you are reporting a technical issue, explain what happened and which calculator feature you were using. This information can help us understand your feedback more easily.</p>
-    <h3>Questions and Feedback</h3>
-    <p>We welcome suggestions that help make our free TDEE Calculator more accessible, informative and easy to use on desktop computers, tablets and mobile devices. Your feedback helps us identify areas where the website's content, functionality or usability may be improved.</p>
-    <p>Please remember that our calculator provides general estimates for educational purposes. We cannot provide personalised medical diagnoses or replace advice from a qualified healthcare professional or registered dietitian.</p>
-    <p>Thank you for visiting TDEE Calculator and taking the time to contact us. We appreciate your interest and welcome your feedback as we continue working to improve the website.</p>
-  </div>
-</section>
+            <div>
+              <label for="sex">Formula setting</label>
+              <select id="sex" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
 
-<section id="privacy" class="page">
-  <div class="card">
-    <h2>Privacy Policy</h2>
-    <p><strong>Last updated:</strong> October 2026</p>
-    <p>This website provides a TDEE calculator. The calculations are performed in your browser using the values you enter. This calculator code does not send those values to a server.</p>
-    <h3>Information You Provide</h3>
-    <p>The calculator uses age, height, weight, sex selection and activity level to produce results. Avoid entering information you do not want processed on your device.</p>
-    <h3>Cookies and Third-Party Services</h3>
-    <p>Hosting providers, analytics tools or advertising services added to this website may use cookies or similar technologies. If such services are enabled, this policy should be updated to accurately describe the providers and their practices.</p>
-    <h3>Policy Updates</h3>
-    <p>This policy may be updated when the website's features or services change. Contact the website owner with privacy questions.</p>
-  </div>
-</section>
+            <div>
+              <label for="age">Age (years)</label>
+              <input id="age" type="number" min="18" max="100" value="30" required>
+            </div>
 
-<section id="disclaimer" class="page">
-  <div class="card">
-    <h2>Disclaimer</h2>
-    <p>The information and calculations on this website are for general educational purposes only. TDEE, BMR and BMI values are estimates and may not reflect your individual needs.</p>
-    <p>This website does not provide medical advice, diagnosis or treatment. Consult a qualified healthcare professional or registered dietitian before making significant changes to your diet or exercise routine, especially if you have a medical condition or specific nutritional needs.</p>
-  </div>
-</section>
+            <div>
+              <label for="weight">Weight (<span id="weightUnit">kg</span>)</label>
+              <input id="weight" type="number" min="1" step="any" value="70" required>
+            </div>
+
+            <div>
+              <label for="height">Height (<span id="heightUnit">cm</span>)</label>
+              <input id="height" type="number" min="1" step="any" value="170" required>
+            </div>
+
+            <div>
+              <label for="activity">Activity level</label>
+              <select id="activity" required>
+                <option value="1.2">Sedentary — little exercise</option>
+                <option value="1.375">Lightly active — 1–3 days/week</option>
+                <option value="1.55" selected>Moderately active — 3–5 days/week</option>
+                <option value="1.725">Very active — 6–7 days/week</option>
+                <option value="1.9">Extra active — very hard activity</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <label for="goal">Your goal</label>
+              <select id="goal">
+                <option value="maintain">Maintain weight</option>
+                <option value="lose">Weight loss estimate (about 300 calories less)</option>
+                <option value="gain">Weight gain estimate (about 300 calories more)</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <button type="submit">Calculate My Calories</button>
+            </div>
+          </div>
+        </form>
+
+        <div id="results" class="results" aria-live="polite">
+          <h2>Your Estimated Results</h2>
+          <div class="result-grid">
+            <div class="result-item">
+              <span>Basal Metabolic Rate (BMR)</span>
+              <strong id="bmrResult">—</strong>
+              <span>calories/day</span>
+            </div>
+            <div class="result-item">
+              <span>Total Daily Energy Expenditure (TDEE)</span>
+              <strong id="tdeeResult">—</strong>
+              <span>calories/day</span>
+            </div>
+            <div class="result-item">
+              <span>Estimated daily goal</span>
+              <strong id="goalResult">—</strong>
+              <span>calories/day</span>
+            </div>
+          </div>
+          <p id="resultText"></p>
+          <p class="notice">These figures are estimates, not medical advice. Real calorie needs can differ.</p>
+        </div>
+        <p id="error" role="alert" style="color:#b71c1c"></p>
+      </div>
+
+      <div class="card">
+        <h2>What Is TDEE?</h2>
+        <p>Total Daily Energy Expenditure (TDEE) is an estimate of the energy your body burns over a full day. It includes the energy used at rest, digestion, everyday movement and exercise.</p>
+        <p>Your estimated maintenance calories are the calories you may need to maintain your current weight over time. Your actual needs depend on factors such as body composition, health, sleep and activity.</p>
+      </div>
+
+      <div class="card">
+        <h2>How to Use This TDEE Calculator</h2>
+        <ol>
+          <li>Choose metric or imperial units.</li>
+          <li>Enter your age, height and weight.</li>
+          <li>Select the formula setting and activity level that best fit you.</li>
+          <li>Choose whether you want to maintain, lose or gain weight.</li>
+          <li>Select “Calculate My Calories” to view your estimates.</li>
+        </ol>
+      </div>
+
+      <div class="card">
+        <h2>How Should You Use Your Result?</h2>
+        <p>Your TDEE is a starting estimate, not an exact measurement. Track your results over several weeks and consider adjusting your intake gradually based on your needs and progress.</p>
+        <p>Avoid extreme calorie restriction. If you are under 18, pregnant, breastfeeding, have a medical condition or have a history of disordered eating, ask a qualified healthcare professional for individualized advice.</p>
+      </div>
+
+      <div class="card">
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq-item">
+          <h3>1. What does TDEE stand for?</h3>
+          <p>TDEE stands for Total Daily Energy Expenditure, an estimate of the total calories your body burns in a day.</p>
+        </div>
+        <div class="faq-item">
+          <h3>2. What is BMR?</h3>
+          <p>Basal Metabolic Rate (BMR) estimates the energy your body uses at rest to support essential functions.</p>
+        </div>
+        <div class="faq-item">
+          <h3>3. How is TDEE calculated?</h3>
+          <p>This calculator estimates BMR using the Mifflin-St Jeor equation, then multiplies it by an activity factor.</p>
+        </div>
+        <div class="faq-item">
+          <h3>4. Which activity level should I choose?</h3>
+          <p>Choose the option that most closely reflects your usual exercise and daily movement. Activity categories are approximate.</p>
+        </div>
+        <div class="faq-item">
+          <h3>5. Are TDEE calculator results exact?</h3>
+          <p>No. The result is an estimate. Your actual energy expenditure can differ due to individual and lifestyle factors.</p>
+        </div>
+        <div class="faq-item">
+          <h3>6. What are maintenance calories?</h3>
+          <p>Maintenance calories are the estimated daily calories needed to keep your weight relatively stable over time.</p>
+        </div>
+        <div class="faq-item">
+          <h3>7. How many calories should I eat to lose weight?</h3>
+          <p>Weight loss usually requires an energy deficit over time. The calculator shows an illustrative 300-calorie reduction, not a personalized prescription.</p>
+        </div>
+        <div class="faq-item">
+          <h3>8. How many calories should I eat to gain weight?</h3>
+          <p>Weight gain generally requires an energy surplus over time. The calculator shows an illustrative 300-calorie increase.</p>
+        </div>
+        <div class="faq-item">
+          <h3>9. Should I recalculate my TDEE?</h3>
+          <p>Recalculate when your weight, activity routine or other relevant circumstances change significantly.</p>
+        </div>
+        <div class="faq-item">
+          <h3>10. Can I use this calculator on my phone?</h3>
+          <p>Yes. The page layout adjusts for mobile screens and desktop browsers.</p>
+        </div>
+        <div class="faq-item">
+          <h3>11. Does this calculator store my personal details?</h3>
+          <p>The calculator runs in your browser and this code does not send your entered measurements to a server.</p>
+        </div>
+        <div class="faq-item">
+          <h3>12. Is this calculator a substitute for medical advice?</h3>
+          <p>No. It is an educational tool and does not diagnose, treat or replace advice from a qualified healthcare professional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="page">
+    <div class="hero">
+      <h1>About This TDEE Calculator</h1>
+      <p>A simple tool for understanding estimated daily energy needs.</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>Our Purpose</h2>
+        <p>This website provides a free, easy-to-use TDEE calculator to help visitors understand estimated daily calorie needs, BMR and maintenance calories.</p>
+        <p>The calculator uses information entered by the visitor and an established estimation equation. Results are general estimates and can differ from real energy expenditure.</p>
+        <p>We aim to present information in clear language so users can better understand the numbers and their limitations.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="page">
+    <div class="hero">
+      <h1>Contact Us</h1>
+      <p>Questions or suggestions about this website?</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>Get in Touch</h2>
+        <p>For feedback, corrections or general website questions, email us at:</p>
+        <p><a href="mailto:harryoscar0344@gmail.com">harryoscar0344@gmail.com</a></p>
+        <p>Please do not send sensitive medical or personal information by email.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="privacy" class="page">
+    <div class="hero">
+      <h1>Privacy Policy</h1>
+      <p>How this calculator handles information.</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>Information You Enter</h2>
+        <p>The calculator processes the age, height, weight, formula setting and activity level you enter in your browser to calculate an estimate. This page's calculator code does not transmit those values to a server or store them in a database.</p>
+
+        <h2>Website Hosting and Logs</h2>
+        <p>This website is hosted through GitHub Pages. The hosting provider may process technical information such as request logs under its own policies.</p>
+
+        <h2>Cookies and Third-Party Services</h2>
+        <p>This code does not set its own tracking cookies or include analytics or advertising scripts. If third-party services are added later, this policy should be updated to describe them.</p>
+
+        <h2>Policy Updates</h2>
+        <p>This policy may be updated when the website's features or practices change. Please review this page periodically.</p>
+
+        <h2>Contact</h2>
+        <p>Privacy questions can be sent to <a href="mailto:harryoscar0344@gmail.com">harryoscar0344@gmail.com</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="disclaimer" class="page">
+    <div class="hero">
+      <h1>Disclaimer</h1>
+      <p>Important information about calculator estimates.</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>Educational Use Only</h2>
+        <p>This TDEE calculator is provided for general informational and educational purposes. It is not medical advice and is not intended to diagnose, treat or prevent any condition.</p>
+
+        <h2>Estimates May Vary</h2>
+        <p>Calorie estimates are based on information you provide and a mathematical equation. They may not reflect your exact energy needs.</p>
+
+        <h2>Seek Professional Guidance</h2>
+        <p>Consult a qualified healthcare professional or registered dietitian before making major dietary changes, particularly if you have a medical condition or specific nutritional needs.</p>
+
+        <h2>Use at Your Own Discretion</h2>
+        <p>You are responsible for how you use the information provided by this tool. We make no guarantee that the estimates will be accurate for every individual.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="page">
+    <div class="hero">
+      <h1>TDEE Calculator FAQs</h1>
+      <p>Answers to common questions about daily calories, BMR and TDEE.</p>
+    </div>
+    <div class="container">
+      <div class="card">
+        <h2>Frequently Asked Questions About TDEE</h2>
+        <p>Visit the Calculator page to estimate your own daily energy needs.</p>
+        <p><a href="#home" data-page="home">Return to the TDEE Calculator</a></p>
+        <p>The 12 questions and answers are available on the Calculator page above.</p>
+      </div>
+    </div>
+  </section>
 </main>
 
 <footer>
-  <div class="footer">
-    <a href="#home">Calculator</a>
-    <a href="#about">About Us</a>
-    <a href="#contact">Contact Us</a>
-    <a href="#privacy">Privacy Policy</a>
-    <a href="#disclaimer">Disclaimer</a>
-  </div>
-  <p>© <span id="year"></span> TDEE Calculator. For educational purposes only.</p>
-</footer>
-
-<script>
-const $ = id => document.getElementById(id);
-$("year").textContent = new Date().getFullYear();
-
-function showPage() {
-  const page = location.hash.slice(1) || "home";
-  const allowed = ["home","about","contact","privacy","disclaimer"];
-  const selected = allowed.includes(page) ? page : "home";
-  document.querySelectorAll(".page").forEach(section => {
-    section.classList.toggle("active", section.id === selected);
-  });
-  $("hero").style.display = selected === "home" ? "block" : "none";
-  window.scrollTo(0,0);
-}
-window.addEventListener("hashchange", showPage);
-showPage();
-
-$("unit").addEventListener("change", () => {
-  const imperial = $("unit").value === "imperial";
-  $("weightUnit").textContent = imperial ? "lb" : "kg";
-  $("heightUnit").textContent = imperial ? "inches" : "cm";
-  $("weight").placeholder = imperial ? "e.g. 154" : "e.g. 70";
-  $("height").placeholder = imperial ? "e.g. 69" : "e.g. 175";
-});
-
-$("calcForm").addEventListener("submit", event => {
-  event.preventDefault();
-  const age = Number($("age").value);
-  let weight = Number($("weight").value);
-  let height = Number($("height").value);
-
-  if (!age || !weight || !height || age < 18 || age > 100 || weight <= 0 || height <= 0) {
-    alert("Please enter valid details. This calculator is intended for adults aged 18 and over.");
-    return;
-  }
-
-  if ($("unit").value === "imperial") {
-    weight *= 0.45359237;
-    height *= 2.54;
-  }
-
-  const adjustment = $("sex").value === "male" ? 5 : -161;
-  const bmr = 10 * weight + 6.25 * height - 5 * age + adjustment;
-  const tdee = bmr * Number($("activity").value);
-  let target = tdee;
-  let message = "This is your estimated maintenance calorie intake.";
-
-  if ($("goal").value === "lose") {
-    target = tdee - 300;
-    message = "This uses a modest 300-calorie daily reduction as an estimate. Individual needs vary.";
-  } else if ($("goal").value === "gain") {
-    target = tdee + 250;
-    message = "This uses a modest 250-calorie daily increase as an estimate. Individual needs vary.";
-  }
-
-  const bmi = weight / ((height / 100) ** 2);
-  let category = "High adult BMI range";
-  if (bmi < 18.5) category = "Below standard adult range";
-  else if (bmi < 25) category = "Standard adult range";
-  else if (bmi < 30) category = "Above standard adult range";
-
-  $("tdee").textContent = Math.round(tdee).toLocaleString();
-  $("bmr").textContent = Math.round(bmr).toLocaleString();
-  $("bmi").textContent = bmi.toFixed(1);
-  $("bmiLabel").textContent = category;
-  $("goalCalories").textContent = Math.max(0,Math.round(target)).toLocaleString();
-  $("goalText").textContent = message;
-  $("result").style.display = "block";
-  $("result").scrollIntoView({behavior:"smooth",block:"start"});
-});
-</script>
-</body>
-</html>
+  <p><strong>Free TDEE Calculator</strong></p>
+  <p>Estimate daily calorie needs with a simple browser-based tool.</p>
+  <p>
+    <
